@@ -6,5 +6,9 @@ import random
 p1 = int(input("0.剪刀 1.石頭 2.布:"))
 # . 的, a: b:別打
 p2 = random.randint(0, 2)
-print("我出:" + str(p1))
-print("電腦出:" + str(p2))
+# 清單: ["xx", "xx"]
+# 編號: 0 1 2
+# 查詢: 清單名[]
+names = ["剪刀", "石頭", "布"]
+print("我出:" + names[p1])
+print("電腦出:" + names[p2])
