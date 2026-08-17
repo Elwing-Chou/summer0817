@@ -1,5 +1,7 @@
 # 引用別的.py
 import random
+import pandas as pd
+import datetime as dt
 # 功能: 帶小括號(參數)
 # 養成習慣: 從0開始數
 # 型態轉換: int() float() str()
@@ -20,3 +22,7 @@ elif p2 == (p1 + 1) % 3:
     print("p2 win")
 else:
     print("even")
+
+# CSV格式(Comma-Separated Values)
+# 姓名,身高
+# Elwing,175
