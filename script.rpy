@@ -3,8 +3,8 @@
 # 宣告該遊戲使用的角色。 color 參數
 # 為角色的名稱著色。
 
-define e = Character("艾琳")
-
+define master = Character("[master_name]")
+define cat = Character("奇怪的貓")
 
 # 遊戲從這裡開始。
 
@@ -32,11 +32,9 @@ label start:
         ysize 600
 
     # 這些顯示對話行。
+    cat "要跟我玩個遊戲才能通過"
+    cat "你叫什麼名字"
 
-    e "您已經建立了一個新的 Ren'Py 遊戲。"
+    $ master_name = renpy.input("請輸入姓名")
 
-    e "一旦您為其新增一段故事, 圖片和音樂, 您就可以將它發佈給全世界！"
-
-    # 遊戲結束。
-
-    return
+    cat "喔 你叫 [master_name]"
