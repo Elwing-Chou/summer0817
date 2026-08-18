@@ -38,3 +38,82 @@ label start:
     $ master_name = renpy.input("請輸入姓名")
 
     cat "喔 你叫 [master_name]"
+
+# 控制第幾場
+$ total = 5
+$ p1win, p2win = 0, 0
+$ i = 0
+label game:
+    cat "[i]/[total]"
+    menu:
+        "剪刀":
+            $ p1 = 0
+        "石頭":
+            $ p1 = 1
+        "布":
+            $ p1 = 2
+    $ p2 = renpy.random.randint(0, 2)
+    # 主人公show
+    if p1 == 0:
+        show master scissor:
+            align (0.1, 0.5)
+            fit "contain"
+            ysize 800
+    elif p1 == 1:
+        show master stone:
+            align (0.1, 0.5)
+            fit "contain"
+            ysize 800
+    else:
+        show master paper:
+            align (0.1, 0.5)
+            fit "contain"
+            ysize 800
+    # 貓show
+    if p2 == 0:
+        show cat scissor:
+            align (0.9, 0.5)
+            fit "contain"
+            ysize 800
+    elif p2 == 1:
+        show cat stone:
+            align (0.9, 0.5)
+            fit "contain"
+            ysize 800
+    else:
+        show cat paper:
+            align (0.9, 0.5)
+            fit "contain"
+            ysize 800
+
+    # 之前剪刀石頭布
+    if p1 == (p2 + 1) % 3:
+        $ p1win = p1win + 1
+        master "我贏了"
+    elif p2 == (p1 + 1) % 3:
+        $ p2win = p2win + 1
+        master "我輸了"
+    else:
+        master "平手"
+
+    $ i = i + 1
+    if i < 5:
+        jump game
+    else:
+        jump final
+
+
+label final:
+    if p1win > p2win:
+        "我贏了"
+    elif p2win > p1win:
+        "貓贏了"
+    else:
+        "平手"
+
+
+
+
+
+
+
