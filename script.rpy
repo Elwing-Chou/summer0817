@@ -15,13 +15,21 @@ label start:
     # images 目錄來顯示它。
 
     scene bg forest:
-        xysize(1920, 1080)
+        xysize (1920, 1080)
 
     # 這顯示了一個角色精靈。 使用了佔位符，但您可以
     # 透過將名為 "eileen happy.png" 的檔案
     # 新增至 images 目錄來取代它。
 
-    show eileen happy
+    show master normal:
+        align (0.1, 0.5)
+        fit "contain"
+        ysize 800
+
+    show cat normal:
+        align (0.9, 0.5)
+        fit "contain"
+        ysize 600
 
     # 這些顯示對話行。
 
