@@ -1,0 +1,9 @@
+1. 每一塊都是一塊長方形
+2.
+<a href="網址"> -> start
+    顯示
+</a> -> end
+
+a. 名稱: 決定是什麼  img->圖片 a->超連結 video->影片
+b. 屬性: 決定細節 a href="網址" img/video src="網址"
+c. 顯示
