@@ -24,6 +24,21 @@ screen = pg.display.set_mode((width, height))
 # 設定遊戲標題
 pg.display.set_caption("象棋")
 
+# 定義我的棋盤(10x9)
+row, col = 10, 9
+chess_board = [[None] * col for i in range(row)]
+# 棋子: [名稱, 陣營]
+# 名稱: 帥/仕....
+# 陣營: 0: 黑  1: 紅
+# 我初始化旗子
+chess_board[0][4] = [0, 0]
+chess_board[9][4] = [0, 1]
+
+# tags: 把我的0 1 2 3轉換成帥/仕
+tags = {
+    0:["將", "帥"]
+}
+
 # 重新繪製整個畫布
 def refresh():
     # 建立畫布bg
@@ -73,12 +88,27 @@ def refresh():
                  2)
 
     # 畫其子
-    pg.draw.circle(bg, COLOR_BLACK, [2 * inter, inter], inter/2, 0)
-    # 旗子上的字體
-    txt = FONT_UI.render("馬", True, COLOR_WHITE)
-    # get_rect: 用中心座標轉左上座標
-    # blit: 把字體貼在bg上
-    bg.blit(txt, txt.get_rect(center=[2 * inter, inter]))
+    for i in range(row):
+        for j in range(col):
+            chess = chess_board[i][j]
+            if not chess == None:
+                role, side = chess
+                # 根據不同陣營, 設置不同的背景/字體顏色
+                if side == 0:
+                    bcolor = COLOR_BLACK
+                    fcolor = COLOR_WHITE
+                else:
+                    bcolor = COLOR_WHITE
+                    fcolor = COLOR_BLACK
+
+                # 把你棋盤位置(0 1 2 3 4) 換成 UI座標 (80, 160, 240)
+                cy, cx = i * inter + inter, j * inter + inter
+                pg.draw.circle(bg, bcolor, [cx, cy], inter/2, 0)
+                # 旗子上的字體
+                txt = FONT_UI.render(tags[role][side], True, fcolor)
+                # get_rect: 用中心座標轉左上座標
+                # blit: 把字體貼在bg上
+                bg.blit(txt, txt.get_rect(center=[cx, cy]))
 
     # 畫選取框
     pg.draw.rect(bg,
