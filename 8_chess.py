@@ -12,6 +12,9 @@ def get_font(size):
 
 
 FONT_UI = get_font(32)
+# 定義顏色
+COLOR_BLACK = [0, 0, 0]
+COLOR_WHITE = [255, 255, 255]
 
 #設定視窗
 inter = 80
@@ -21,12 +24,54 @@ screen = pg.display.set_mode((width, height))
 # 設定遊戲標題
 pg.display.set_caption("象棋")
 
-#
+# 重新繪製整個畫布
 def refresh():
     # 建立畫布bg
     bg = pg.Surface(screen.get_size())
     # 把畫布填滿某個顏色rgb
     bg.fill([199, 167, 82])
+    # 畫棋盤的橫線(背景, 顏色, 開始座標, 結束座標, 寬度)
+    for i in range(10):
+        pg.draw.line(bg,
+                     COLOR_BLACK,
+                     [inter, inter*i+inter],
+                     [width-inter, inter*i+inter],
+                     2)
+    # 畫棋盤的直線
+    for i in range(9):
+        pg.draw.line(bg,
+                     COLOR_BLACK,
+                     [inter*i+inter, inter],
+                     [inter*i+inter, 5 * inter],
+                     2)
+        pg.draw.line(bg,
+                     COLOR_BLACK,
+                     [inter*i+inter, 6 * inter],
+                     [inter*i+inter, 10 * inter],
+                     2)
+    # 畫上面的斜線
+    pg.draw.line(bg,
+                 COLOR_BLACK,
+                 [4 * inter, inter],
+                 [6 * inter, 3 * inter],
+                 2)
+    pg.draw.line(bg,
+                 COLOR_BLACK,
+                 [6 * inter, inter],
+                 [4 * inter, 3 * inter],
+                 2)
+    # 畫下面的斜線
+    pg.draw.line(bg,
+                 COLOR_BLACK,
+                 [4 * inter, 8 * inter],
+                 [6 * inter, 10 * inter],
+                 2)
+    pg.draw.line(bg,
+                 COLOR_BLACK,
+                 [6 * inter, 8 * inter],
+                 [4 * inter, 10 * inter],
+                 2)
+
     screen.blit(bg, [0,0])
     # 對畫面進行更新(才會真的秀出來)
     pg.display.update()
