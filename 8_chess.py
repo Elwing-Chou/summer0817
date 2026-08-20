@@ -10,11 +10,12 @@ def get_font(size):
             return pg.font.SysFont(f, size)
     return pg.font.SysFont(None, size)
 
-inter = 40
+inter = 80
 FONT_UI = get_font(inter//2)
 # 定義顏色
 COLOR_BLACK = [0, 0, 0]
 COLOR_WHITE = [255, 255, 255]
+COLOR_RED = [255, 0, 0]
 
 #設定視窗
 width, height = inter * 10, inter * 11
@@ -78,6 +79,12 @@ def refresh():
     # get_rect: 用中心座標轉左上座標
     # blit: 把字體貼在bg上
     bg.blit(txt, txt.get_rect(center=[2 * inter, inter]))
+
+    # 畫選取框
+    pg.draw.rect(bg,
+                 COLOR_RED,
+                 [2*inter-inter/2, inter-inter/2, inter, inter],
+                 1)
 
     screen.blit(bg, [0,0])
     # 對畫面進行更新(才會真的秀出來)
