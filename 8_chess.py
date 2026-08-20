@@ -182,7 +182,6 @@ while running:
                     # 2.2 新的不是空白: 選擇(依據game_round)
                     if chess[1] == game_round % 2:
                         chosen = [ci, cj]
-                        print(chosen)
             refresh()
         # 如果收到的事件是按x
         if event.type == pg.QUIT:
