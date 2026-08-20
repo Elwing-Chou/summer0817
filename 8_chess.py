@@ -10,14 +10,13 @@ def get_font(size):
             return pg.font.SysFont(f, size)
     return pg.font.SysFont(None, size)
 
-
-FONT_UI = get_font(32)
+inter = 40
+FONT_UI = get_font(inter//2)
 # 定義顏色
 COLOR_BLACK = [0, 0, 0]
 COLOR_WHITE = [255, 255, 255]
 
 #設定視窗
-inter = 80
 width, height = inter * 10, inter * 11
 # 產生視窗
 screen = pg.display.set_mode((width, height))
@@ -71,6 +70,14 @@ def refresh():
                  [6 * inter, 8 * inter],
                  [4 * inter, 10 * inter],
                  2)
+
+    # 畫其子
+    pg.draw.circle(bg, COLOR_BLACK, [2 * inter, inter], inter/2, 0)
+    # 旗子上的字體
+    txt = FONT_UI.render("馬", True, COLOR_WHITE)
+    # get_rect: 用中心座標轉左上座標
+    # blit: 把字體貼在bg上
+    bg.blit(txt, txt.get_rect(center=[2 * inter, inter]))
 
     screen.blit(bg, [0,0])
     # 對畫面進行更新(才會真的秀出來)
