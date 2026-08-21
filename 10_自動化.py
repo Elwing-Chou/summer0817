@@ -27,3 +27,8 @@ if __name__ == "__main__":
     e = driver.find_elements(By.CLASS_NAME, "C6AK7c")[2]
     e.click()
     time.sleep(5)
+    es = driver.find_elements(By.CLASS_NAME, "ImUqSb")
+    for e in es:
+        e.find_element(By.TAG_NAME, "a").click()
+        time.sleep(1)
+    time.sleep(5)
