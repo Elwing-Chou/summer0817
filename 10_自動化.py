@@ -41,7 +41,7 @@ if __name__ == "__main__":
         src = e.get_attribute("src")
         # 存圖片
         h = {
-            "User-Agent":"Mozilla/5.0"
+            "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
         }
         r = req.Request(src, headers=h)
         resp = req.urlopen(r)
