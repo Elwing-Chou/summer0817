@@ -18,4 +18,9 @@ if __name__ == "__main__":
     driver.get('https://www.google.com/')
     driver.maximize_window()
 
+    # find_element, find_elements
+    e = driver.find_element(By.TAG_NAME, "textarea")
+    e.send_keys("chiikawa")
+    e.send_keys(Keys.ENTER)
+
     time.sleep(5)
