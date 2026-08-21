@@ -43,6 +43,46 @@ tags = {
 game_round = 0
 # [i, j]
 chosen = None
+
+def isvalideat(chess, lasti, lastj, newi, newj):
+    role, side = chess
+    if role == 0:
+        # special: 同一行有另外一個將或帥
+        role2, side2 = chess_board[newi][newj]
+        if role == role2 and not side == side2 and lastj == newj:
+            return True
+        # same
+        return isvalidmove(chess, lasti, lastj, newi, newj)
+    return False
+
+def isvalidmove(chess, lasti, lastj, newi, newj):
+    role, side = chess
+    # 如果他是將或帥
+    if role == 0:
+        # 判斷是否只走一步
+        if abs(newi-lasti) + abs(newj-lastj) == 1:
+            # 黑方
+            if side == 0:
+                # 不用判斷舊的位置(判斷是否合理方格)
+                if 0 <= newi <= 2 and 3 <= newj <= 5:
+                    return True
+                else:
+                    return False
+            # 紅方
+            else:
+                # 不用判斷舊的位置(判斷是否合理方格)
+                if 7 <= newi <= 9 and 3 <= newj <= 5:
+                    return True
+                else:
+                    return False
+        # 如果你走的不只一步
+        else:
+            return False
+
+    # 沒有核准的都return False
+    return False
+
+
 # 重新繪製整個畫布
 def refresh():
     global chosen, game_round
@@ -158,10 +198,11 @@ while running:
                 # case 1.1 空白位置
                 if chess == None:
                     # 移動
-                    chess_board[ci][cj] = last_chess
-                    chess_board[lasti][lastj] = None
-                    game_round = game_round + 1
-                    chosen = None
+                    if isvalidmove(last_chess, lasti, lastj, ci, cj) == True:
+                        chess_board[ci][cj] = last_chess
+                        chess_board[lasti][lastj] = None
+                        game_round = game_round + 1
+                        chosen = None
                 # case 1.2 有棋子
                 else:
                     # case 1.2.1 我方: 換一顆
@@ -169,10 +210,11 @@ while running:
                         chosen = [ci, cj]
                     # case 1.2.2 敵方: 吃
                     else:
-                        chess_board[ci][cj] = last_chess
-                        chess_board[lasti][lastj] = None
-                        game_round = game_round + 1
-                        chosen = None
+                        if isvalideat(last_chess, lasti, lastj, ci, cj) == True:
+                            chess_board[ci][cj] = last_chess
+                            chess_board[lasti][lastj] = None
+                            game_round = game_round + 1
+                            chosen = None
             # 2. 之前沒有選
             else:
                 # 2.1 新的是空白
