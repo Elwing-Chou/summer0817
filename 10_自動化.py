@@ -22,5 +22,8 @@ if __name__ == "__main__":
     e = driver.find_element(By.TAG_NAME, "textarea")
     e.send_keys("chiikawa")
     e.send_keys(Keys.ENTER)
-
+    time.sleep(3)
+    # 找到上面的圖片那個選擇
+    e = driver.find_elements(By.CLASS_NAME, "C6AK7c")[2]
+    e.click()
     time.sleep(5)
