@@ -44,13 +44,16 @@ if __name__ == "__main__":
             "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
         }
         r = req.Request(src, headers=h)
-        resp = req.urlopen(r)
-        print(src)
-        # 打開一個新的檔案, 把內容寫到新的檔案裡 w:寫入 b:不是純文字
-        fname = f"google/{time.time()}.jpg"
-        f = open(fname, "wb")
-        f.write(resp.read())
-        # 檔案關閉=儲存
-        f.close()
+        try:
+            print(src)
+            resp = req.urlopen(r)
+            # 打開一個新的檔案, 把內容寫到新的檔案裡 w:寫入 b:不是純文字
+            fname = f"google/{time.time()}.jpg"
+            f = open(fname, "wb")
+            f.write(resp.read())
+            # 檔案關閉=儲存
+            f.close()
+        except:
+            print("pass:", src)
 
     time.sleep(5)
